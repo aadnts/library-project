@@ -1,6 +1,8 @@
 # LibraryProject
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.3.
+To install angular and prepare the setup, please follow the instructions on this link:
+https://angular.io/guide/setup-local
 
 ## Development server
 
