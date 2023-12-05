@@ -1,16 +1,59 @@
-<div id="login-form-container">
-    <h3>Login</h3>
-    <form>
+<div *ngIf="!showRegistration && !authService.token">
+    <!-- Login form -->
+    <div [formGroup]="form" id="login-form-container">
+      <h3>Login</h3>
+      <form method="post">
         <div class="field-container">
-            <div class="login-item-line">
-                <label for="username">Identifiant</label>
-                <input type="text" id="username" name="username" />
-            </div>
-            <div class="login-item-line">
-                <label for="password">Mot de passe</label>
-                <input type="password" id="password" name="password" />
-            </div>
-            <button>Valider</button>
+          <div class="login-item-line">
+            <label for="username">Identifiant</label>
+            <input formControlName="username" type="text" id="username" name="username" />
+          </div>
+          <div class="login-item-line">
+            <label for="password">Mot de passe</label>
+            <input formControlName="password" type="password" id="password" name="password" />
+          </div>
+          <button (click)="submit()">Valider</button>
+          <span class="error text-red-700" *ngIf="loginError">{{ loginError }}</span>
         </div>
-    </form>
-</div>
+      </form>
+      <!-- <span *ngIf="error" class="error">{{ error }}</span> -->
+      <span class="text-center">Pas encore enregistré ? </span>
+      <button (click)="showRegistration = true">S'enregistrer</button>
+    </div>
+  </div>
+  
+  <div *ngIf="showRegistration && !authService.token">
+    <!-- Registration form -->
+    <div [formGroup]="registrationForm" id="registration-form-container">
+      <h3 class="text-center">Créer un compte</h3>
+      <form method="post">
+        <div class="field-container">
+          <div class="login-item-line">
+            <label for="newUsername">Email</label>
+            <input formControlName="newUsername" type="text" id="newUsername" name="newUsername" />
+          </div>
+          <div class="login-item-line">
+            <label for="newPassword">Mot de passe</label>
+            <input formControlName="newPassword" type="password" id="newPassword" name="newPassword" />
+          </div>
+          <div class="login-item-line">
+            <label for="lastName">Nom</label>
+            <input formControlName="lastName" type="text" id="lastName" name="lastName" />
+          </div>
+          <div class="login-item-line">
+            <label for="firstName">Prénom</label>
+            <input formControlName="firstName" type="text" id="firstName" name="firstName" />
+          </div>
+          <button (click)="register()">Confirmer</button>
+          <span class="error text-center text-red-700" *ngIf="registrationError">{{ registrationError }}</span>
+        </div>
+      </form>
+      <button (click)="showRegistration = false">Retour au login</button>
+    </div>
+  </div>
+  
+  <div class="text-center min-h-full pt-20" *ngIf="authService.token">
+    <h1 class="text-5xl">Welcome {{ authService.user.firstName }}</h1>
+    <button (click)="authService.logout()">Logout</button>
+  </div>
+  

@@ -10,6 +10,8 @@ import { RouterModule } from '@angular/router';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { DocumentsPageComponent } from './documents-page/documents-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,10 +22,12 @@ import { HomePageComponent } from './home-page/home-page.component';
     FooterComponent,
     LoginPageComponent,
     DocumentsPageComponent,
-    HomePageComponent
+    HomePageComponent,
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       {path: 'login', component: LoginPageComponent},
       {path: 'documents', component: DocumentsPageComponent},
